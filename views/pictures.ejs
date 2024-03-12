@@ -9,12 +9,12 @@
         <div class="mb-3">
             <input type="file" id="formFile" class="form-control">
         </div>
-        <% pictures.forEach(function(picture) { %>
+        <% for (picture of pictures) { %>
             <div class="text-center">
               <img src="/<%=picture%>" alt="" class="mb-3" style="width: 100%">
               <h4><%=picture%></h4>
             </div>
-          <% }) %>
+          <% } %>
         <script src="../javascripts/pictures.js"></script>
     </body>
 </html>

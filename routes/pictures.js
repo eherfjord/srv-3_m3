@@ -9,6 +9,12 @@ router.get('/', async (req, res, next) => {
     res.render('pictures', { pictures: pictures });
 });
 
+// Get single picture, named
+router.get('/:pictureName', async (req, res, next) => {
+    const picture = req.params.pictureName;
+    res.render('pictures', { pictures: [picture]});
+});
+
 router.post('/', async (req, res, next) => {
     console.log(req.files);
     const file = req.files.file;
