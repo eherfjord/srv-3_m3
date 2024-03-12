@@ -1,1 +1,0 @@
-test file for BED module 3

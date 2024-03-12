@@ -8,5 +8,11 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <% pictures.forEach(function(picture) { %>
+      <div class="text-center">
+        <img src="/<%=picture%>" alt="" class="mb-3" style="width: 100%">
+        <h4><%=picture%></h4>
+      </div>
+    <% }) %>
   </body>
 </html>
