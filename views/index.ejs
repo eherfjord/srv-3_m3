@@ -10,8 +10,8 @@
     <p>Welcome to <%= title %></p>
     <% for (picture of pictures) { %>
       <div class="text-center">
-        <img src="/<%=picture%>" alt="" class="mb-3" style="width: 75%">
-        <h4><%=picture%></h4>
+        <img src="data:image/png; base64, <%=picture.src%>" alt="" class="mb-3" style="width: 500px">
+              <h4><%=picture.name%></h4>
       </div>
     <% } %>
   </body>
