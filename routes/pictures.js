@@ -14,10 +14,11 @@ const { requiresAuth } = require('express-openid-connect');
 // GET pictures listing
 router.get('/', requiresAuth(), async (req, res, next) => {
     // const pictures = fs.readdirSync(path.join(__dirname, '../pictures'));
+    console.log(req.oidc.user);
     const params = {
         Bucket: process.env.CYCLIC_BUCKET_NAME,
         Delimiter: '/',
-        Prefix: 'public/'
+        Prefix: req.oidc.user.email + '/'
     };
     const allObjects = await s3.listObjects(params).promise();
     const keys = allObjects?.Contents?.map(x => x.Key);
@@ -49,7 +50,7 @@ router.post('/', requiresAuth(), async (req, res, next) => {
     await s3.putObject({
         Body: file.data,
         Bucket: process.env.CYCLIC_BUCKET_NAME,
-        Key: "public/" + file.name
+        Key: req.oidc.user.email + '/' + file.name
     }).promise();
 
     // fs.writeFileSync(path.join(__dirname, '../pictures/', file.name), file.data);
