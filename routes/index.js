@@ -28,7 +28,7 @@ router.get('/', async function(req, res, next) {
       }
   }));
 
-  res.render('index', { pictures: pictures, title: 'Express' });
+  res.render('index', { pictures: pictures, title: 'Express', isAuthenticated: req.oidc.isAuthenticated() });
 });
 
 module.exports = router;

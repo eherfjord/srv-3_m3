@@ -6,6 +6,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+// Authentication setup
+const { auth } = require('express-openid-connect');
+
 const fileUpload = require('express-fileupload');
 
 const indexRouter = require('./routes/index');
@@ -26,6 +29,25 @@ app.use(express.static(path.join(__dirname, 'pictures')));
 
 // File uploader module
 app.use(fileUpload());
+
+// Auth config and use
+const config = {
+  authRequired: false,
+  auth0Logout: true
+};
+
+const port = process.env.PORT || 3000;
+if (!config.baseURL && !process.env.BASE_URL && process.env.PORT && process.env.NODE_ENV !== 'production') {
+  config.baseURL = `http://localhost:${port}`;
+}
+
+app.use(auth(config));
+
+// Middleware to enable user object
+app.use(async (req, res, next) => {
+  res.locals.user = req.oidc.user;
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/pictures', picturesRouter);

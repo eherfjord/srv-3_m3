@@ -8,11 +8,10 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <% for (picture of pictures) { %>
-      <div class="text-center">
-        <img src="data:image/png; base64, <%=picture.src%>" alt="" class="mb-3" style="width: 500px">
-              <h4><%=picture.name%></h4>
-      </div>
+    <% if (locals.isAuthenticated) { %>
+          <p>You are logged in.</p>
+      <% } else { %>
+          <p>You are not logged in. <a href="/login" class="underline">Login</a>.</p>
     <% } %>
   </body>
 </html>
