@@ -34,7 +34,7 @@ router.get('/', requiresAuth(), async (req, res, next) => {
         }
     }));
 
-    res.render('pictures', { pictures: pictures });
+    res.render('pictures', { pictures: pictures, isAuthenticated: req.oidc.isAuthenticated() });
 });
 
 // Get single picture, named
